@@ -2,18 +2,13 @@
 
 ## Project Summary
 
-In this project you will build and explain a small music recommender system.
+This project is a small content-based music recommender. 
+It compares a user's preferences with features from each song, 
+calculates a score, and ranks the songs from strongest to weakest match.
 
-Your goal is to:
-
-- Represent songs and a user "taste profile" as data
-- Design a scoring rule that turns that data into recommendations
-- Evaluate what your system gets right and wrong
-- Reflect on how this mirrors real world AI recommenders
-
-Replace this paragraph with your own summary of what your version does.
-
----
+The goal is not to recreate Spotify, 
+but to understand how simple data and scoring rules 
+can produce recommendations that feel personalized.
 
 ## How The System Works
 
@@ -30,6 +25,29 @@ Some prompts to answer:
 You can include a simple diagram or bullet list if helpful.
 
 ---
+
+Real recommendation platforms may combine many types of information, including listening history, likes, skips, playlists, and similarities between users. Collaborative filtering uses behavior from many users to find patterns, while content-based filtering compares characteristics of items directly with a user's preferences.
+
+My project uses a simplified content-based approach.
+
+Each song contains:
+- genre
+- mood
+- energy
+- tempo
+- valence
+- danceability
+- acousticness
+
+The user profile contains:
+
+- favorite genre
+
+- favorite mood
+
+- target energy
+
+- acoustic preference
 
 ## Getting Started
 
@@ -85,27 +103,28 @@ Paste a sample of your recommender's output here as a text block so a reader can
 
 ## Experiments You Tried
 
-Use this section to document the experiments you ran. For example:
+I tested the system using several different user profiles:
 
-- What happened when you changed the weight on genre from 2.0 to 0.5
-- What happened when you added tempo or valence to the score
-- How did your system behave for different types of users
+- High-Energy Pop
 
----
+- Chill Lofi
 
+- Deep Intense Rock
+
+- A conflicting profile that wanted high-energy intense ambient music
+
+The profiles produced noticeably different rankings because genre, mood, and energy affected the scores differently.
+
+I also tested a weight change where energy became twice as important and genre became less important. 
+High-energy songs began ranking higher across genre boundaries. 
+This showed how sensitive a recommendation system can be to manually chosen weights.
 ## Limitations and Risks
 
-Summarize some limitations of your recommender.
+This recommender uses a very small synthetic catalog, so it cannot represent the variety of real music.
 
-Examples:
+The scoring system depends heavily on manually assigned labels such as genre and mood. Music can fit multiple genres or moods, but this model treats those fields as simple exact matches.
 
-- It only works on a tiny catalog
-- It does not understand lyrics or language
-- It might over favor one genre or mood
-
-You will go deeper on this in your model card.
-
----
+The model also has no listening history, skips, likes, lyrics, cultural context, or feedback from other users. Because of this, its recommendations should be treated as a classroom simulation rather than predictions of a person's real musical taste.
 
 ## Reflection
 
@@ -113,10 +132,11 @@ Read and complete `model_card.md`:
 
 [**Model Card**](model_card.md)
 
-Write 1 to 2 paragraphs here about what you learned:
+One thing I learned is that a recommendation system does not have to use a complicated machine-learning model to feel personalized. 
+Even a small scoring formula can create noticeably different results when the user's preferences change.
 
-- about how recommenders turn data into predictions
-- about where bias or unfairness could show up in systems like this
-
-
-
+I also learned that the design decisions behind the model matter a lot. 
+Changing one weight can completely change which songs appear at the top. 
+AI helped me brainstorm scoring rules and edge cases, 
+but I still needed to understand the calculations, 
+run different profiles, and check whether the results actually made sense.
